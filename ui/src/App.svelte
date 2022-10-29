@@ -2,6 +2,7 @@
   import { onMount, setContext } from 'svelte';
   import { AppWebsocket, ActionHash, InstalledAppInfo } from '@holochain/client';
   import '@material/mwc-circular-progress';
+  import { Router, Route, Link } from "svelte-navigator";
 
   import { appWebsocketContext, appInfoContext } from './contexts';
   import CreateNote from "./main/logic/CreateNote.svelte"
@@ -38,7 +39,19 @@
     </div>
   {:else}
     <div id="content" >
-      <CreateNote></CreateNote>
+
+      <Router>
+        <header>
+          <h1>NoteSeeker</h1>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/new-note">New Note</Link>
+          </nav>
+        </header>
+        <Route path="/new-note" component={CreateNote} />
+        <Route path="/"> Main </Route>
+      </Router>
+
     </div>
   {/if}
 </main>
