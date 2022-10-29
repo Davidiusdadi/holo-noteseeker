@@ -4,6 +4,7 @@
   import '@material/mwc-circular-progress';
 
   import { appWebsocketContext, appInfoContext } from './contexts';
+  import CreateNote from "./main/logic/CreateNote.svelte"
 
   let appWebsocket: AppWebsocket | undefined;
   let appInfo: InstalledAppInfo | undefined;
@@ -36,7 +37,9 @@
       <mwc-circular-progress indeterminate />
     </div>
   {:else}
-    <div id="content" />
+    <div id="content" >
+      <CreateNote></CreateNote>
+    </div>
   {/if}
 </main>
 

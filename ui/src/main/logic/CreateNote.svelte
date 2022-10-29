@@ -1,6 +1,6 @@
 <script lang="ts">
 import { createEventDispatcher, getContext } from 'svelte';
-import { InstalledCell, AppWebsocket, InstalledAppInfo } from '@holochain/client';
+import { InstalledCell, AppWebsocket, InstalledAppInfo, Record } from '@holochain/client';
 import { appWebsocketContext, appInfoContext } from '../../contexts';
 import { Note } from './note';
 import '@material/mwc-button';
@@ -18,10 +18,10 @@ $: text;
 
 async function createNote() {
   const cellData = appInfo.cell_data.find((c: InstalledCell) => c.role_id === 'main')!;
-  const note: Note = { 
+  const note: Note = {
     text: text!,
   };
-  
+
   const record: Record = await appWebsocket.callZome({
     cap_secret: null,
     cell_id: cellData.cell_id,
@@ -35,10 +35,10 @@ async function createNote() {
 </script>
 <div style="display: flex; flex-direction: column">
   <span style="font-size: 18px">Create Note</span>
-  
-    <mwc-textarea outlined label="" on:input="{e => this._text = e.target.value}"></mwc-textarea>
 
-  <mwc-button 
+    <mwc-textarea outlined label="" on:input="{e => text = e.target.value}"></mwc-textarea>
+
+  <mwc-button
     label="Create Note"
     disabled={!( text )}
     on:click="{() => createNote()}"
