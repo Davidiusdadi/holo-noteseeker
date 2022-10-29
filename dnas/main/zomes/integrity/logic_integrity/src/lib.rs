@@ -10,3 +10,7 @@ pub fn validate(_op: Op) -> ExternResult<ValidateCallbackResult> {
 pub enum EntryTypes {
     Note(Note),
 }
+#[hdk_link_types]
+pub enum LinkTypes {
+    AllNotes,
+}
