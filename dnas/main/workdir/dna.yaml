@@ -1,0 +1,19 @@
+---
+manifest_version: "1"
+name: main
+integrity:
+  network_seed: ~
+  properties: ~
+  origin_time: 1667056769901837
+  zomes:
+    - name: logic_integrity
+      hash: ~
+      bundled: "../../../target/wasm32-unknown-unknown/release/logic_integrity.wasm"
+      dependencies: ~
+coordinator:
+  zomes:
+    - name: logic
+      hash: ~
+      bundled: "../../../target/wasm32-unknown-unknown/release/logic.wasm"
+      dependencies:
+        - name: logic_integrity

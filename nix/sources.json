@@ -1,0 +1,14 @@
+{
+    "holonix": {
+        "branch": "main",
+        "description": "NixOS && Holochain",
+        "homepage": "",
+        "owner": "holochain",
+        "repo": "holonix",
+        "rev": "5aa60cbee2896a0d3c055bbf5b623cff0dd4cd00",
+        "sha256": "0rh8kp3awdv0s6rf0w2mwrncmjwlb0r7nzgnvw67k79mm6hpmrsm",
+        "type": "tarball",
+        "url": "https://github.com/holochain/holonix/archive/5aa60cbee2896a0d3c055bbf5b623cff0dd4cd00.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

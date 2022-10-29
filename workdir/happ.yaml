@@ -1,0 +1,17 @@
+---
+manifest_version: "1"
+name: holo-noteseeker
+description: ~
+roles:
+  - id: main
+    provisioning:
+      strategy: create
+      deferred: false
+    dna:
+      bundled: "../dnas/main/workdir/main.dna"
+      modifiers:
+        network_seed: ~
+        properties: ~
+        origin_time: ~
+      version: ~
+      clone_limit: 0
