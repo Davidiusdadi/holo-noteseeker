@@ -1,3 +1,5 @@
+pub mod tag;
+pub use tag::*;
 pub mod note;
 pub use note::*;
 use hdi::prelude::*;
@@ -9,8 +11,13 @@ pub fn validate(_op: Op) -> ExternResult<ValidateCallbackResult> {
 #[unit_enum(UnitEntryTypes)]
 pub enum EntryTypes {
     Note(Note),
+    Tag(Tag),
 }
 #[hdk_link_types]
 pub enum LinkTypes {
     AllNotes,
+    NoteToTag,
+    AllTags,
+    AllTagsByAuthor,
+    AllNotesByAuthor,
 }

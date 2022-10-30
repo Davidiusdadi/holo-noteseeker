@@ -4,52 +4,40 @@ import '@material/mwc-circular-progress';
 import { decode } from '@msgpack/msgpack';
 import { InstalledCell, Record, ActionHash, AppWebsocket, InstalledAppInfo } from '@holochain/client';
 import { appInfoContext, appWebsocketContext } from '../../contexts';
-import { Note } from './note';
+import { Tag } from './tag';
+import TagDetail from './TagDetail.svelte';
 
 export let actionHash: ActionHash;
 
 let appInfo = getContext(appInfoContext).getAppInfo();
 let appWebsocket = getContext(appWebsocketContext).getAppWebsocket();
 
-let note: Note | undefined;
-$: note;
+let records: Array<Record> | undefined;
+$: records;
 
 onMount(async () => {
   const cellData = appInfo.cell_data.find((c: InstalledCell) => c.role_id === 'main')!;
 
-  const record: Record | undefined = await appWebsocket.callZome({
+  records = await appWebsocket.callZome({
     cap_secret: null,
     cell_id: cellData.cell_id,
     zome_name: 'logic',
-    fn_name: 'get_note',
+    fn_name: 'get_tag_for_note',
     payload: actionHash,
     provenance: cellData.cell_id[1]
   });
-  if (record) {
-    note = decode((record.entry as any).Present.entry) as Note;
-
-
-
-  }
 });
 
 </script>
 
-{#if note }
+{#if records }
   <div style="display: flex; flex-direction: column">
-    <span style="font-size: 18px">Note</span>
-    { note.text }
-    <div>
-
-    </div>
+    {#each records as record}
+      <TagDetail actionHash={record.signed_action.hashed.hash} style="margin-bottom: 8px;"></TagDetail>
+    {/each}
   </div>
 {:else}
   <div style="display: flex; flex: 1; align-items: center; justify-content: center">
     <mwc-circular-progress indeterminate></mwc-circular-progress>
   </div>
 {/if}
-
-
-<style >
-
-</style>

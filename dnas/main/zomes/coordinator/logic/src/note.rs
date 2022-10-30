@@ -11,6 +11,8 @@ pub fn create_note(note: Note) -> ExternResult<Record> {
         )?;
     let path = Path::from("all_notes");
     create_link(path.path_entry_hash()?, note_hash.clone(), LinkTypes::AllNotes, ())?;
+    let my_agent_pub_key = agent_info()?.agent_latest_pubkey;
+    create_link(my_agent_pub_key, note_hash.clone(), LinkTypes::AllNotesByAuthor, ())?;
     Ok(record)
 }
 #[hdk_extern]

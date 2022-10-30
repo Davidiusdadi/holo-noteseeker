@@ -7,6 +7,7 @@
   import { appWebsocketContext, appInfoContext } from './contexts';
   import CreateNote from "./main/logic/CreateNote.svelte"
   import AllNotes from "./main/logic/AllNotes.svelte"
+  import Search from "./main/logic/Search.svelte"
 
   let appWebsocket: AppWebsocket | undefined;
   let appInfo: InstalledAppInfo | undefined;
@@ -52,7 +53,9 @@
         </header>
         <Route path="/new-note" component={CreateNote} />
         <Route path="/all-notes" component={AllNotes} />
-        <Route path="/*"> Main </Route>
+        <Route path="/*">
+          <Search />
+        </Route>
       </Router>
 
     </div>
