@@ -13,6 +13,14 @@ export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
   watch: true,
 
   rootDir: 'public',
+  middleware: [
+    async (ctx, next) => {
+      if (ctx.path.match(/\/[a-z-]+$/)) {
+        ctx.path = '/';
+      }
+      await next();
+    }
+  ],
 
   /** Compile JS for older browsers. Requires @web/dev-server-esbuild plugin */
   // esbuildTarget: 'auto'

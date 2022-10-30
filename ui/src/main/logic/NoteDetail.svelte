@@ -35,7 +35,8 @@ onMount(async () => {
 {#if note }
   <div style="display: flex; flex-direction: column">
     <span style="font-size: 18px">Note</span>
-	    </div>
+    { note.text }
+  </div>
 {:else}
   <div style="display: flex; flex: 1; align-items: center; justify-content: center">
     <mwc-circular-progress indeterminate></mwc-circular-progress>
